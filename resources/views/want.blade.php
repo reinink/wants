@@ -50,8 +50,16 @@
                     {{ $comment->user->name }}
                 </div>
                 <div class="text-xs leading-5 text-gray-500">
-                    {{ $comment->created_at->format('M j, Y \a\t g:i a') }}
+                    <a class="hover:underline" href="{{ $comment->url() }}">
+                        {{ $comment->created_at->format('M j, Y \a\t g:i a') }}
+                    </a>
                 </div>
+                @if ($comment->isAuthor())
+                    <div class="flex items-center text-yellow-400">
+                        <svg class="fill-current w-3 h-3" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <div class="ml-1 text-xs font-medium">Author</div>
+                    </div>
+                @endif
             </div>
             <div class="px-8 flex-1 flex items-center">
                 {{ $comment->comment }}

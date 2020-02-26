@@ -16,7 +16,35 @@
 </header>
 
 <main class="max-w-6xl mx-auto py-12 sm:px-6 lg:px-8">
-    {{-- Status Totals Here --}}
+    <div class="mb-12 grid grid-cols-3 gap-8">
+        <div class="bg-orange-400 shadow rounded-lg flex items-center justify-between px-8 py-5">
+            <div class="flex items-center">
+                <svg class="text-white fill-current w-8 h-8" viewBox="0 0 20 20">
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                </svg>
+                <div class="ml-3 text-white font-medium">Requested</div>
+            </div>
+            <div class="text-white ml-3 text-2xl font-medium">{{ $statuses->requested }}</div>
+        </div>
+        <div class="bg-blue-500 shadow rounded-lg flex items-center justify-between px-8 py-5">
+            <div class="flex items-center">
+                <svg class="text-white fill-current w-7 h-7" viewBox="0 0 20 20">
+                    <path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z" />
+                </svg>
+                <div class="ml-3 text-white font-medium">Planned</div>
+            </div>
+            <div class="text-white ml-3 text-2xl font-medium">{{ $statuses->planned }}</div>
+        </div>
+        <div class="bg-green-400 shadow rounded-lg flex items-center justify-between px-8 py-5">
+            <div class="flex items-center">
+                <svg class="text-white fill-current w-8 h-8" viewBox="0 0 20 20">
+                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                </svg>
+                <div class="ml-3 text-white font-medium">Completed</div>
+            </div>
+            <div class="text-white ml-3 text-2xl font-medium">{{ $statuses->completed }}</div>
+        </div>
+    </div>
     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg">
             <table class="min-w-full">
@@ -30,7 +58,14 @@
                                 @endif
                             </div>
                         </th>
-                        {{-- Last Comment Heading Here --}}
+                        <th class="px-6 pt-5 pb-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider" width="25%">
+                            <div class="inline-flex items-center hover:text-gray-900">
+                                <a class="" href="/?sort=last_comment">Last comment</a>
+                                @if (Request::input('sort') === 'last_comment')
+                                    <svg class="block w-4 h-4 fill-current" viewBox="0 0 20 20"><polygon points="9.293 12.95 10 13.657 15.657 8 14.243 6.586 10 10.828 5.757 6.586 4.343 8" /></svg>
+                                @endif
+                            </div>
+                        </th>
                         <th class="px-6 pt-5 pb-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider" width="15%">
                             <div class="inline-flex items-center hover:text-gray-900">
                                 <a class="" href="/?sort=status">Status</a>
@@ -62,7 +97,21 @@
                                     {{ $want->category->name }}
                                 </div>
                             </td>
-                            {{-- Last Comment Cell Here --}}
+                            <td class="px-6 py-4 border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full overflow-hidden bg-gray-400">
+                                        <img class="object-cover w-8 h-8" src="{{ $want->lastComment->user->photo }}" />
+                                    </div>
+                                    <div class="ml-2">
+                                        <div class="text-sm leading-5 text-gray-900">
+                                            {{ $want->lastComment->user->name }}
+                                        </div>
+                                        <div class="text-xs leading-5 text-gray-500">
+                                            {{ $want->lastComment->created_at->format('M j, Y \a\t g:i a') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                             <td class="px-6 py-4 border-b border-gray-200">
                                 @if ($want->status === 'Requested')
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-100 text-orange-700">

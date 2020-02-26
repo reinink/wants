@@ -15,4 +15,19 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function url()
+    {
+        return $this->want->url().'#comment-'.$this->id;
+    }
+
+    public function isAuthor()
+    {
+        return $this->want
+            ->comments
+            ->sortBy('created_at')
+            ->first()
+            ->user
+            ->is($this->user);
+    }
 }
