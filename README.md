@@ -1,4 +1,6 @@
-# Laracon Online 2020
+# Wants
+
+Source code for my example app used in my [Laracon Online](https://laracon.net) 2020 talk.
 
 ![](https://raw.githubusercontent.com/reinink/wants/master/screenshot.png)
 
