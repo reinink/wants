@@ -1,5 +1,7 @@
 # Laracon Online 2020
 
+![](https://raw.githubusercontent.com/reinink/wants/master/screenshot.png)
+
 ## Database Schema
 
 - `users`
